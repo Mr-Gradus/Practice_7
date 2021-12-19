@@ -13,15 +13,11 @@ private:
 	int m_month;
 	int m_year;
 public:
-	Date (int day, int month, int year) : m_day(day), m_month(month), m_year(year) 
-	{
-		cout << "ctor" << endl;
-	}
+	Date(int day, int month, int year) : m_day(day), m_month(month), m_year(year) {}
+	
 
-	~Date()
-	{
-		cout << "DESTRUCOR" << endl;
-	}
+	~Date() {}
+	
 
 	int getDay() const
 	{
@@ -39,11 +35,6 @@ public:
 	}
 	friend ostream& operator<<(ostream& out, const Date& oDate);
 
-	void print()
-	{
-		cout << "today!!!" << endl;
-	}
-
 };
 
 ostream& operator<<(ostream& out, const Date& oDate)
@@ -52,19 +43,23 @@ ostream& operator<<(ostream& out, const Date& oDate)
 	return out;
 }
 
+//#################### TASK_2 ####################
+
 
 
 int main()
 {
+
+
 	cout << "#################### TASK_1 ####################" << endl << endl;
 
 	unique_ptr<Date> today = make_unique<Date>(19, 12, 2021);
-	
+
 	cout << today->getDay() << "." << today->getMonth() << "." << today->getYear() << endl;
-	
+
 	cout << *today;
-	
-	
+
+
 	unique_ptr<Date> date = move(today);
 	bool NotEmpty = (bool)today;
 	//cout << boolalpha << NotEmpty << endl;
@@ -72,13 +67,49 @@ int main()
 		cout << "ptr today not null" << endl;
 	else
 		cout << "ptr today is null" << endl;
-	
 
 	bool notEmpty = (bool)date;
 	if (date)
 		cout << "ptr date not null" << endl;
 	else
 		cout << "ptr date is null" << endl;
+
+
+	cout << "#################### TASK_2 ####################" << endl << endl;
+
+	unique_ptr<Date> date1 = make_unique<Date>(13, 8, 2021);
+	unique_ptr<Date> date2 = make_unique<Date>(9, 12, 2021);
+
+	if (date1->getYear() > date2->getYear())
+	{
+		cout << *date1 << "later date" << endl;
+	}
+	else if (date1->getYear() < date2->getYear())
+	{
+		cout << *date2 << "later date" << endl;
+	}
+	else {
+		if (date1->getMonth() > date2->getMonth())
+		{
+			cout << *date1 << "later date" << endl;
+		}
+		else if (date1->getMonth() < date2->getMonth())
+		{
+			cout << *date2 << "later date" << endl;
+		}
+		else
+		{
+			if (date1->getDay() > date2->getDay())
+			{
+				cout << *date1 << "later date" << endl;
+			}
+			else
+			{
+				cout << *date2 << "later date" << endl;
+			}
+
+		}
+	}
 	return 0;
 
 }
